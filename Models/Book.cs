@@ -7,6 +7,7 @@ namespace BookPublisher.Models
     {
         [Key] 
         public int Id { get; set; }
+        public int IdList { get; set; }
         public List<BookAuthor>? BookList { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }

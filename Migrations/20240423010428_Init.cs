@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookPublisher.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace BookPublisher.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdList = table.Column<int>(type: "int", nullable: false),
+                    IdList = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -74,22 +74,20 @@ namespace BookPublisher.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idbook = table.Column<int>(type: "int", nullable: false),
-                    idauthor = table.Column<int>(type: "int", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: true),
-                    BookId = table.Column<int>(type: "int", nullable: true)
+                    idbook = table.Column<int>(type: "int", nullable: true),
+                    idauthor = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_book_authors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_book_authors_author_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_book_authors_author_idauthor",
+                        column: x => x.idauthor,
                         principalTable: "author",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_book_authors_books_BookId",
-                        column: x => x.BookId,
+                        name: "FK_book_authors_books_idbook",
+                        column: x => x.idbook,
                         principalTable: "books",
                         principalColumn: "Id");
                 });
@@ -101,15 +99,6 @@ namespace BookPublisher.Migrations
                 {
                     { 1, 1, "Võ Hoàng Việt" },
                     { 2, 2, "Nguyễn Phạm Phương Linh" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "book_authors",
-                columns: new[] { "Id", "AuthorId", "BookId", "idauthor", "idbook" },
-                values: new object[,]
-                {
-                    { 1, null, null, 1, 1 },
-                    { 2, null, null, 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -126,15 +115,24 @@ namespace BookPublisher.Migrations
                 columns: new[] { "Id", "BookId", "Name" },
                 values: new object[] { 1, 1, "NoName" });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_book_authors_AuthorId",
+            migrationBuilder.InsertData(
                 table: "book_authors",
-                column: "AuthorId");
+                columns: new[] { "Id", "idauthor", "idbook" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_book_authors_BookId",
+                name: "IX_book_authors_idauthor",
                 table: "book_authors",
-                column: "BookId");
+                column: "idauthor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_book_authors_idbook",
+                table: "book_authors",
+                column: "idbook");
 
             migrationBuilder.CreateIndex(
                 name: "IX_books_PublishersId",

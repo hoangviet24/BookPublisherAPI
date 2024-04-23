@@ -1,5 +1,6 @@
 ﻿using BookPublisher.Models;
 using Microsoft.EntityFrameworkCore;
+using BookPublisher.Models.DTO;
 
 namespace BookPublisher.Data
 {
@@ -14,8 +15,10 @@ namespace BookPublisher.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Book>().HasOne(b => b.Publishers).WithMany(b => b.IdBook);
-
+            builder.Entity<BookAuthor>().HasOne(b => b.Book).WithMany(b => b.BookList).HasForeignKey(b=>b.idbook);
+            builder.Entity<BookAuthor>().HasOne(b=>b.Author).WithMany(b=>b.Author_List).HasForeignKey(b=>b.idauthor);
             new DbInitalize(builder).Seed();
         }
+        public DbSet<BookPublisher.Models.DTO.BookWithAuthorAndPublisherDTO> BookWithAuthorAndPublisherDTO { get; set; } = default!;
     }
 }

@@ -4,6 +4,7 @@ using BookPublisher.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookPublisher.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240423010428_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,9 +81,6 @@ namespace BookPublisher.Migrations
                     b.Property<int?>("Genre")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdList")
-                        .HasColumnType("int");
-
                     b.Property<bool?>("IsRead")
                         .HasColumnType("bit");
 
@@ -111,7 +111,6 @@ namespace BookPublisher.Migrations
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
-                            IdList = 0,
                             IsRead = false,
                             PublisherId = 1,
                             Rate = 4,
@@ -125,7 +124,6 @@ namespace BookPublisher.Migrations
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
-                            IdList = 0,
                             IsRead = false,
                             PublisherId = 1,
                             Rate = 3,
@@ -168,50 +166,6 @@ namespace BookPublisher.Migrations
                             idauthor = 2,
                             idbook = 2
                         });
-                });
-
-            modelBuilder.Entity("BookPublisher.Models.DTO.BookWithAuthorAndPublisherDTO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AuthorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateAdd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateOnly?>("DateRead")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublisherId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Rate")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isRead")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BookWithAuthorAndPublisherDTO");
                 });
 
             modelBuilder.Entity("BookPublisher.Models.Publishers", b =>

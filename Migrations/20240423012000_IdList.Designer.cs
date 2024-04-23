@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookPublisher.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240416021836_InitDB")]
-    partial class InitDB
+    [Migration("20240423012000_IdList")]
+    partial class IdList
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace BookPublisher.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdList")
+                    b.Property<int?>("IdList")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -81,6 +81,9 @@ namespace BookPublisher.Migrations
                     b.Property<int?>("Genre")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdList")
+                        .HasColumnType("int");
+
                     b.Property<bool?>("IsRead")
                         .HasColumnType("bit");
 
@@ -111,6 +114,7 @@ namespace BookPublisher.Migrations
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
+                            IdList = 0,
                             IsRead = false,
                             PublisherId = 1,
                             Rate = 4,
@@ -124,6 +128,7 @@ namespace BookPublisher.Migrations
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
+                            IdList = 0,
                             IsRead = false,
                             PublisherId = 1,
                             Rate = 3,
@@ -139,23 +144,17 @@ namespace BookPublisher.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AuthorId")
+                    b.Property<int?>("idauthor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idauthor")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idbook")
+                    b.Property<int?>("idbook")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("idauthor");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("idbook");
 
                     b.ToTable("book_authors");
 
@@ -172,6 +171,50 @@ namespace BookPublisher.Migrations
                             idauthor = 2,
                             idbook = 2
                         });
+                });
+
+            modelBuilder.Entity("BookPublisher.Models.DTO.BookWithAuthorAndPublisherDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAdd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly?>("DateRead")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublisherId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isRead")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookWithAuthorAndPublisherDTO");
                 });
 
             modelBuilder.Entity("BookPublisher.Models.Publishers", b =>
@@ -212,13 +255,17 @@ namespace BookPublisher.Migrations
 
             modelBuilder.Entity("BookPublisher.Models.BookAuthor", b =>
                 {
-                    b.HasOne("BookPublisher.Models.Author", null)
+                    b.HasOne("BookPublisher.Models.Author", "Author")
                         .WithMany("Author_List")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("idauthor");
 
-                    b.HasOne("BookPublisher.Models.Book", null)
+                    b.HasOne("BookPublisher.Models.Book", "Book")
                         .WithMany("BookList")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("idbook");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("BookPublisher.Models.Author", b =>

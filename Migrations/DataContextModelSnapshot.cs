@@ -179,7 +179,6 @@ namespace BookPublisher.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AuthorName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateAdd")
@@ -191,8 +190,8 @@ namespace BookPublisher.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Genre")
+                        .HasColumnType("int");
 
                     b.Property<string>("PublisherId")
                         .HasColumnType("nvarchar(max)");
@@ -206,7 +205,7 @@ namespace BookPublisher.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isRead")
+                    b.Property<bool?>("isRead")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

@@ -20,6 +20,5 @@ namespace BookPublisher.Models
         public DateTime? DateAdd { get; set; }
         public int? PublisherId { get; set; }
         public Publishers? Publishers { get; set; }
-        
     }
 }

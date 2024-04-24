@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookPublisher.Data;
 using BookPublisher.Models.DTO;
+using BookPublisher.Models;
 
 namespace BookPublisher.Controllers
 {
@@ -23,86 +24,138 @@ namespace BookPublisher.Controllers
 
         // GET: api/BookWithAuthorAndPublisherDTOes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookWithAuthorAndPublisherDTO>>> GetBookWithAuthorAndPublisherDTO()
+        public IActionResult GetAll ()
         {
-            return await _context.BookWithAuthorAndPublisherDTO.ToListAsync();
+            var allbookDomain = _context.books;
+            var allbookDTO = allbookDomain.Select(books => new BookWithAuthorAndPublisherDTO()
+            {
+                Id = books.Id,
+                Title = books.Title,
+                Description = books.Description,
+                isRead = books.IsRead,
+                DateRead = (bool)books.IsRead ? books.DateRead.Value :null,
+                Rate = (bool)books.IsRead ? books.Rate : null,
+                Genre = books.Genre,
+                Url = books.CoverUrl,
+                PublisherId = books.Publishers.Name,
+                AuthorName = books.BookList.Select(n=>n.Author.Name).ToList()
+            }) ;
+            return Ok   (allbookDTO);
         }
 
         // GET: api/BookWithAuthorAndPublisherDTOes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<BookWithAuthorAndPublisherDTO>> GetBookWithAuthorAndPublisherDTO(int id)
+        public IActionResult GetById([FromRoute] int id)
         {
-            var bookWithAuthorAndPublisherDTO = await _context.BookWithAuthorAndPublisherDTO.FindAsync(id);
-
-            if (bookWithAuthorAndPublisherDTO == null)
+            var GetBookId = _context.books.Where(book => book.Id == id);
+            if(GetBookId == null)
             {
                 return NotFound();
             }
-
-            return bookWithAuthorAndPublisherDTO;
+            var GetBookDTO = GetBookId.Select(books => new BookWithAuthorAndPublisherDTO()
+            {
+                Id = books.Id,
+                Title = books.Title,
+                Description = books.Description,
+                isRead = books.IsRead,
+                DateRead = (bool)books.IsRead ? books.DateRead.Value : null,
+                Rate = (bool)books.IsRead ? books.Rate : null,
+                Genre = books.Genre,
+                Url = books.CoverUrl,
+                PublisherId = books.Publishers.Name,
+                AuthorName = books.BookList.Select(n => n.Author.Name).ToList()
+            });
+            return Ok(GetBookDTO);
         }
 
         // PUT: api/BookWithAuthorAndPublisherDTOes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBookWithAuthorAndPublisherDTO(int id, BookWithAuthorAndPublisherDTO bookWithAuthorAndPublisherDTO)
+        public IActionResult Put(int id, [FromBody] AddBookDTO addBookDTO)
         {
-            if (id != bookWithAuthorAndPublisherDTO.Id)
+            var bookmainDomain = _context.books.FirstOrDefault(n => n.Id == id);
+            if(bookmainDomain != null)
             {
-                return BadRequest();
+                bookmainDomain.Title = addBookDTO.Title;
+                bookmainDomain.Description = addBookDTO.Description;
+                bookmainDomain.IsRead = addBookDTO.isRead;
+                bookmainDomain.DateRead = addBookDTO.DateRead;
+                bookmainDomain.DateAdd = addBookDTO.DateAdd;
+                bookmainDomain.Rate = addBookDTO.Rate;
+                bookmainDomain.CoverUrl = addBookDTO.Url;
+                bookmainDomain.PublisherId = addBookDTO.PublisherId;
+                _context.SaveChanges();
             }
-
-            _context.Entry(bookWithAuthorAndPublisherDTO).State = EntityState.Modified;
-
-            try
+            var authorDomain = _context.book_authors.Where(a => a.idbook == id).ToList();
+            if(authorDomain != null)
             {
-                await _context.SaveChangesAsync();
+                _context.book_authors.RemoveRange(authorDomain);
+                _context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            foreach(var authorid in addBookDTO.AuthorId)
             {
-                if (!BookWithAuthorAndPublisherDTOExists(id))
+                var book_author = new BookAuthor()
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    idbook = id,
+                    idauthor = authorid,
+                };
+                _context.book_authors.Add(book_author);
+                _context.SaveChanges();
             }
-
-            return NoContent();
+            return Ok(addBookDTO);
         }
 
         // POST: api/BookWithAuthorAndPublisherDTOes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<BookWithAuthorAndPublisherDTO>> PostBookWithAuthorAndPublisherDTO(BookWithAuthorAndPublisherDTO bookWithAuthorAndPublisherDTO)
+        public IActionResult Post([FromBody] AddBookDTO bookDTO)
         {
-            _context.BookWithAuthorAndPublisherDTO.Add(bookWithAuthorAndPublisherDTO);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBookWithAuthorAndPublisherDTO", new { id = bookWithAuthorAndPublisherDTO.Id }, bookWithAuthorAndPublisherDTO);
+            var bookmainDomain = new Book
+            {
+                Title = bookDTO.Title,
+                Description = bookDTO.Description,
+                IsRead = bookDTO.isRead,
+                DateRead = bookDTO.DateRead,
+                DateAdd = bookDTO.DateAdd,
+                Rate = bookDTO.Rate,
+                Genre = bookDTO.Genre,
+                CoverUrl = bookDTO.Url,
+                PublisherId = bookDTO.PublisherId,
+            };
+            _context.books.Add(bookmainDomain);
+            _context.SaveChanges();
+            foreach(var id in bookDTO.AuthorId)
+            {
+                var book_author = new BookAuthor
+                {
+                    idauthor = id,
+                    idbook = bookmainDomain.Id,
+                };
+                _context.book_authors.Add(book_author);
+                _context.SaveChanges();
+            }
+            return Ok();
         }
 
         // DELETE: api/BookWithAuthorAndPublisherDTOes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBookWithAuthorAndPublisherDTO(int id)
         {
-            var bookWithAuthorAndPublisherDTO = await _context.BookWithAuthorAndPublisherDTO.FindAsync(id);
+            var bookWithAuthorAndPublisherDTO = await _context.books.FindAsync(id);
             if (bookWithAuthorAndPublisherDTO == null)
             {
                 return NotFound();
             }
 
-            _context.BookWithAuthorAndPublisherDTO.Remove(bookWithAuthorAndPublisherDTO);
+            _context.books.Remove(bookWithAuthorAndPublisherDTO);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BookWithAuthorAndPublisherDTOExists(int id)
-        {
-            return _context.BookWithAuthorAndPublisherDTO.Any(e => e.Id == id);
-        }
+        //private bool BookWithAuthorAndPublisherDTOExists(int id)
+        //{
+        //    return _context.BookWithAuthorAndPublisherDTO.Any(e => e.Id == id);
+        //}
     }
 }

@@ -251,6 +251,4 @@ D:\API\BookPublisher\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.Sy
 D:\API\BookPublisher\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\API\BookPublisher\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\API\BookPublisher\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
-D:\API\BookPublisher\obj\Debug\net8.0\BookPublisher.RazorAssemblyInfo.cache
-D:\API\BookPublisher\obj\Debug\net8.0\BookPublisher.RazorAssemblyInfo.cs
 D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll

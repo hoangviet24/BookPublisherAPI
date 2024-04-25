@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookPublisher.Data;
 using BookPublisher.Models;
+using BookPublisher.Repository;
 
 namespace BookPublisher.Controllers
 {
@@ -15,7 +16,6 @@ namespace BookPublisher.Controllers
     public class BooksController : ControllerBase
     {
         private readonly DataContext _context;
-
         public BooksController(DataContext context)
         {
             _context = context;
@@ -27,7 +27,6 @@ namespace BookPublisher.Controllers
         {
             return await _context.books.ToListAsync();
         }
-
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)

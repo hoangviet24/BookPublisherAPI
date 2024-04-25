@@ -24,7 +24,7 @@ namespace BookPublisher.Controllers
 
         // GET: api/BookWithAuthorAndPublisherDTOes
         [HttpGet]
-        public IActionResult GetAll ()
+        public IActionResult GetAll()
         {
             var allbookDomain = _context.books;
             var allbookDTO = allbookDomain.Select(books => new BookWithAuthorAndPublisherDTO()
@@ -33,14 +33,14 @@ namespace BookPublisher.Controllers
                 Title = books.Title,
                 Description = books.Description,
                 isRead = books.IsRead,
-                DateRead = (bool)books.IsRead ? books.DateRead.Value :null,
+                DateRead = (bool)books.IsRead ? books.DateRead.Value : null,
                 Rate = (bool)books.IsRead ? books.Rate : null,
                 Genre = books.Genre,
                 Url = books.CoverUrl,
                 PublisherId = books.Publishers.Name,
-                AuthorName = books.BookList.Select(n=>n.Author.Name).ToList()
-            }) ;
-            return Ok   (allbookDTO);
+                AuthorName = books.BookList.Select(n => n.Author.Name).ToList()
+            });
+            return Ok(allbookDTO);
         }
 
         // GET: api/BookWithAuthorAndPublisherDTOes/5

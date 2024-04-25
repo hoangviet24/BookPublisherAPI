@@ -75,14 +75,6 @@ namespace BookPublisher.Controllers
 
         // POST: api/BookAuthors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<BookAuthor>> PostBookAuthor(BookAuthor bookAuthor)
-        {
-            _context.book_authors.Add(bookAuthor);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBookAuthor", new { id = bookAuthor.Id }, bookAuthor);
-        }
 
         // DELETE: api/BookAuthors/5
         [HttpDelete("{id}")]

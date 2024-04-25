@@ -66,7 +66,7 @@ namespace BookPublisher.Repository
                 Rate = (bool)books.IsRead ? books.Rate : null,
                 Genre = books.Genre,
                 Url = books.CoverUrl,
-                PublisherId = books.Publishers.Name,
+                PublisherName = (string) books.Publishers.Name.Trim(),
                 AuthorName = books.BookList.Select(n => n.Author.Name).ToList()
             }).ToList();
             return allbookDTO;
@@ -85,7 +85,7 @@ namespace BookPublisher.Repository
                 Rate = (bool)books.IsRead ? books.Rate : null,
                 Genre = books.Genre,
                 Url = books.CoverUrl,
-                PublisherId = books.Publishers.Name,
+                PublisherName = books.Publishers.Name,
                 AuthorName = books.BookList.Select(n => n.Author.Name).ToList()
             }).FirstOrDefault();
             return GetBookDTO;

@@ -11,7 +11,7 @@
         public Genre? Genre { get; set; }
         public string? Url { get; set; }
         public DateTime DateAdd { get; set; }
-        public string? PublisherId { get; set; }
+        public string? PublisherName { get; set; }
         public List<string>? AuthorName { get; set; }
     }
 }

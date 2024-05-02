@@ -7,6 +7,7 @@ namespace BookPublisher.Repository
     {
         List<AuthorDTO> GetAll();
         AuthorDTO GetById(int id);
+        AuthorDTO GetByName(string name);
         AddAuthorDTO AddAuthor(AddAuthorDTO addBookDTO);
         AddAuthorDTO? Put(int id,AddAuthorDTO addBookDTO);
         Author? Delete(int id);

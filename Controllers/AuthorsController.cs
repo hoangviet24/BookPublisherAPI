@@ -20,9 +20,8 @@ namespace BookPublisher.Controllers
         {
             _context = context;
         }
-
         // GET: api/Authors
-        [HttpGet]
+        [HttpGet("Get-All")]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthor()
         {
             return await _context.author.ToListAsync();

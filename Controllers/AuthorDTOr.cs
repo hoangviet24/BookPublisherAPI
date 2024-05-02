@@ -1,8 +1,11 @@
 ﻿using BookPublisher.Data;
+using BookPublisher.Models;
 using BookPublisher.Models.DTO;
 using BookPublisher.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BookPublisher.Controllers
 {
@@ -16,6 +19,40 @@ namespace BookPublisher.Controllers
         {
             _datacontext = datacontext;
             _authorRepository = authorRepository;
+        }
+        [HttpGet("Get-By-Sortby")]
+        public IActionResult Get()
+        {
+            var post = _authorRepository.GetAll().OrderByDescending(a=>a.Id).ToList();
+            return Ok(post);
+        }
+        [HttpGet("Get-Filter")]
+        public IActionResult Get(string Name)
+        {
+            var getid = _authorRepository.GetByName(Name);
+            return Ok(getid);
+        }
+        [HttpGet("{page}")]
+        public async Task<ActionResult<List<Author>>> GetAuthor(int page)
+        {
+            if (_datacontext.author == null)
+            {
+                return NotFound();
+            }
+            var pageResults = 2f;
+            var pageCount = Math.Ceiling(_datacontext.author.Count() / pageResults);
+            var author = await _datacontext.author
+                .Skip((page - 1) * (int)pageResults)
+                .Take((int)pageResults)
+                .ToListAsync();
+            var response = new AuthorPage
+            {
+                Author = author,
+                CurrentPage = page,
+                Pages = (int)pageCount,
+            };
+            Log.Information("Student Page => {@response}", response);
+            return Ok(response);
         }
         [HttpGet("Get-all")]
         public IActionResult Getall()

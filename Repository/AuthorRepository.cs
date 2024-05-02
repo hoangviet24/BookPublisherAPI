@@ -57,6 +57,17 @@ namespace BookPublisher.Repository
             return GetIdDTO;
         }
 
+        public AuthorDTO GetByName(string name)
+        {
+            var GetNameAuthor = _context.author.Where(a => a.Name.Contains(name));
+            var GetNameDTO = GetNameAuthor.Select(author => new AuthorDTO()
+            {
+                Id = author.Id,
+                Name = author.Name,
+            }).FirstOrDefault();
+            return GetNameDTO;
+        }
+
         public AddAuthorDTO? Put(int id, AddAuthorDTO addAuthorDTO)
         {
             var authormainDomain = _context.author.FirstOrDefault(n => n.Id == id);

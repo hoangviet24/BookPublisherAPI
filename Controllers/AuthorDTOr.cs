@@ -20,11 +20,24 @@ namespace BookPublisher.Controllers
             _datacontext = datacontext;
             _authorRepository = authorRepository;
         }
-        [HttpGet("Get-By-Sortby")]
-        public IActionResult Get()
+        [HttpGet("Sorted: 1 - DESC, 2 - ASC")]
+        public IActionResult Get(int id)
         {
-            var post = _authorRepository.GetAll().OrderByDescending(a=>a.Id).ToList();
-            return Ok(post);
+            if(id == 1)
+            {
+                var post = _authorRepository.GetAll().OrderByDescending(a=>a.Id).ToList();
+                return Ok(post);
+            }
+            else if(id == 2)
+            {
+                var post = _authorRepository.GetAll().OrderBy(a => a.Id).ToList();
+                return Ok(post);
+            }
+            else
+            {
+                return BadRequest();
+            }
+          
         }
         [HttpGet("Get-Filter")]
         public IActionResult Get(string Name)
@@ -33,13 +46,13 @@ namespace BookPublisher.Controllers
             return Ok(getid);
         }
         [HttpGet("{page}")]
-        public async Task<ActionResult<List<Author>>> GetAuthor(int page)
+        public async Task<ActionResult<List<Author>>> GetAuthor(int page,float PAGERESULT)
         {
             if (_datacontext.author == null)
             {
                 return NotFound();
             }
-            var pageResults = 2f;
+            var pageResults = PAGERESULT;
             var pageCount = Math.Ceiling(_datacontext.author.Count() / pageResults);
             var author = await _datacontext.author
                 .Skip((page - 1) * (int)pageResults)

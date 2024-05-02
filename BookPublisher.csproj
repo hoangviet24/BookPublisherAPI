@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\AuthorsController.cs" />
-    <Compile Remove="Controllers\BooksController.cs" />
-    <Compile Remove="Controllers\PublishersController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
   </ItemGroup>
 
@@ -37,9 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Controllers\AuthorsController.cs" />
-    <None Include="Controllers\BooksController.cs" />
-    <None Include="Controllers\PublishersController.cs" />
     <None Include="Controllers\WeatherForecastController.cs" />
   </ItemGroup>
 

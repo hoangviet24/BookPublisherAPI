@@ -20,5 +20,6 @@ namespace BookPublisher.Data
             new DbInitalize(builder).Seed();
         }
         public DbSet<BookPublisher.Models.DTO.BookWithAuthorAndPublisherDTO> BookWithAuthorAndPublisherDTO { get; set; } = default!;
+        public DbSet<BookPublisher.Models.DTO.AuthorDTO> AuthorDTO { get; set; } = default!;
     }
 }

@@ -1,6 +1,4 @@
-﻿using BookPublisher.Models;
-
-namespace BookPublisher.Controllers
+﻿namespace BookPublisher.Models
 {
     internal class AuthorPage
     {

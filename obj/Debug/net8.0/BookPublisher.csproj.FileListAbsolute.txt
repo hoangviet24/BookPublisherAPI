@@ -263,3 +263,12 @@ D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Json.dll
 D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Multipart.dll
 D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Text.dll
 D:\API\BookPublisher\bin\Debug\net8.0\Std.UriTemplate.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\API\BookPublisher\bin\Debug\net8.0\System.Net.Http.Formatting.dll
+D:\API\BookPublisher\bin\Debug\net8.0\System.Web.Http.dll
+D:\API\BookPublisher\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

@@ -1,0 +1,105 @@
+2024-05-13 15:43:43.187 +07:00 [INF] User profile is available. Using 'C:\Users\hoang\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-05-13 15:43:43.297 +07:00 [INF] Now listening on: https://localhost:7000
+2024-05-13 15:43:43.298 +07:00 [INF] Now listening on: http://localhost:5079
+2024-05-13 15:43:43.300 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-13 15:43:43.301 +07:00 [INF] Hosting environment: Development
+2024-05-13 15:43:43.301 +07:00 [INF] Content root path: D:\API\BookPublisher
+2024-05-13 15:43:43.678 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/index.html - null null
+2024-05-13 15:43:43.827 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/index.html - 200 null text/html;charset=utf-8 150.502ms
+2024-05-13 15:43:43.875 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-13 15:43:43.881 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 5.9357ms
+2024-05-13 15:43:43.927 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_vs/browserLink - null null
+2024-05-13 15:43:43.953 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 26.5694ms
+2024-05-13 15:43:44.178 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - null null
+2024-05-13 15:43:44.314 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 135.9664ms
+2024-05-13 15:43:58.496 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7000/api/User/Login - application/json 63
+2024-05-13 15:43:58.523 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.UserController.Login (BookPublisher)'
+2024-05-13 15:43:58.537 +07:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(BookPublisher.Models.DTO.LoginRequestDTO) on controller BookPublisher.Controllers.UserController (BookPublisher).
+2024-05-13 15:43:59.366 +07:00 [INF] Executed DbCommand (25ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-05-13 15:43:59.527 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-05-13 15:43:59.544 +07:00 [INF] Executing OkObjectResult, writing value of type 'BookPublisher.Models.DTO.LoginResponseDTO'.
+2024-05-13 15:43:59.549 +07:00 [INF] Executed action BookPublisher.Controllers.UserController.Login (BookPublisher) in 1006.8226ms
+2024-05-13 15:43:59.550 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.UserController.Login (BookPublisher)'
+2024-05-13 15:43:59.556 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7000/api/User/Login - 200 null application/json; charset=utf-8 1059.5743ms
+2024-05-13 15:44:12.343 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Filter-page-sort?name=%C4%91en&page=1&pageSize=1&isAccess=true - null null
+2024-05-13 15:44:12.395 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.AuthorDTOr.Filtering (BookPublisher)'
+2024-05-13 15:44:12.398 +07:00 [INF] Route matched with {action = "Filtering", controller = "AuthorDTOr"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Filtering(System.String, Int32, Single, Boolean) on controller BookPublisher.Controllers.AuthorDTOr (BookPublisher).
+2024-05-13 15:44:12.561 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0_contains='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Name]
+FROM [author] AS [a]
+WHERE [a].[Name] LIKE @__name_0_contains ESCAPE N'\'
+2024-05-13 15:44:12.565 +07:00 [INF] Executing OkObjectResult, writing value of type 'BookPublisher.Models.DTO.AuthorDTO'.
+2024-05-13 15:44:12.566 +07:00 [INF] Executed action BookPublisher.Controllers.AuthorDTOr.Filtering (BookPublisher) in 167.1236ms
+2024-05-13 15:44:12.568 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.AuthorDTOr.Filtering (BookPublisher)'
+2024-05-13 15:44:12.570 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Filter-page-sort?name=%C4%91en&page=1&pageSize=1&isAccess=true - 200 null application/json; charset=utf-8 226.0193ms
+2024-05-13 15:45:47.426 +07:00 [INF] User profile is available. Using 'C:\Users\hoang\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-05-13 15:45:47.580 +07:00 [INF] Now listening on: https://localhost:7000
+2024-05-13 15:45:47.583 +07:00 [INF] Now listening on: http://localhost:5079
+2024-05-13 15:45:47.586 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-13 15:45:47.588 +07:00 [INF] Hosting environment: Development
+2024-05-13 15:45:47.589 +07:00 [INF] Content root path: D:\API\BookPublisher
+2024-05-13 15:45:48.415 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/index.html - null null
+2024-05-13 15:45:48.567 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/index.html - 200 null text/html;charset=utf-8 153.3148ms
+2024-05-13 15:45:48.626 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_vs/browserLink - null null
+2024-05-13 15:45:48.626 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-13 15:45:48.638 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 11.8387ms
+2024-05-13 15:45:48.657 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.5ms
+2024-05-13 15:45:49.317 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - null null
+2024-05-13 15:45:49.449 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 131.5615ms
+2024-05-13 15:46:11.330 +07:00 [INF] Request starting HTTP/2 POST https://localhost:7000/api/User/Login - application/json 63
+2024-05-13 15:46:11.352 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.UserController.Login (BookPublisher)'
+2024-05-13 15:46:11.366 +07:00 [INF] Route matched with {action = "Login", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(BookPublisher.Models.DTO.LoginRequestDTO) on controller BookPublisher.Controllers.UserController (BookPublisher).
+2024-05-13 15:46:12.190 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-05-13 15:46:12.349 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-05-13 15:46:12.367 +07:00 [INF] Executing OkObjectResult, writing value of type 'BookPublisher.Models.DTO.LoginResponseDTO'.
+2024-05-13 15:46:12.373 +07:00 [INF] Executed action BookPublisher.Controllers.UserController.Login (BookPublisher) in 1002.5833ms
+2024-05-13 15:46:12.375 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.UserController.Login (BookPublisher)'
+2024-05-13 15:46:12.380 +07:00 [INF] Request finished HTTP/2 POST https://localhost:7000/api/User/Login - 200 null application/json; charset=utf-8 1049.8777ms
+2024-05-13 15:46:30.473 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-all - null null
+2024-05-13 15:46:30.513 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher)'
+2024-05-13 15:46:30.515 +07:00 [INF] Route matched with {action = "Getall", controller = "AuthorDTOr"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Getall() on controller BookPublisher.Controllers.AuthorDTOr (BookPublisher).
+2024-05-13 15:46:30.704 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Name]
+FROM [author] AS [a]
+2024-05-13 15:46:30.709 +07:00 [INF] author Page => [{"Id":1018,"Name":"Đen Vâu","$type":"AuthorDTO"},{"Id":1019,"Name":"Sơn tùng","$type":"AuthorDTO"},{"Id":1020,"Name":"Akira Okesuma","$type":"AuthorDTO"}]
+2024-05-13 15:46:30.723 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BookPublisher.Models.DTO.AuthorDTO, BookPublisher, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-05-13 15:46:30.725 +07:00 [INF] Executed action BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher) in 208.4537ms
+2024-05-13 15:46:30.726 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher)'
+2024-05-13 15:46:30.727 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-all - 200 null application/json; charset=utf-8 254.2644ms
+2024-05-13 15:46:49.633 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-all - null null
+2024-05-13 15:46:49.639 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher)'
+2024-05-13 15:46:49.640 +07:00 [INF] Route matched with {action = "Getall", controller = "AuthorDTOr"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Getall() on controller BookPublisher.Controllers.AuthorDTOr (BookPublisher).
+2024-05-13 15:46:49.656 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[Name]
+FROM [author] AS [a]
+2024-05-13 15:46:49.658 +07:00 [INF] author Page => [{"Id":1018,"Name":"Đen Vâu","$type":"AuthorDTO"},{"Id":1019,"Name":"Sơn tùng","$type":"AuthorDTO"},{"Id":1020,"Name":"Akira Okesuma","$type":"AuthorDTO"}]
+2024-05-13 15:46:49.662 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BookPublisher.Models.DTO.AuthorDTO, BookPublisher, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-05-13 15:46:49.663 +07:00 [INF] Executed action BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher) in 21.8103ms
+2024-05-13 15:46:49.664 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.AuthorDTOr.Getall (BookPublisher)'
+2024-05-13 15:46:49.666 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-all - 200 null application/json; charset=utf-8 33.2637ms
+2024-05-13 15:46:57.560 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-By-Id?id=1018 - null null
+2024-05-13 15:46:57.568 +07:00 [INF] Executing endpoint 'BookPublisher.Controllers.AuthorDTOr.GetId (BookPublisher)'
+2024-05-13 15:46:57.571 +07:00 [INF] Route matched with {action = "GetId", controller = "AuthorDTOr"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetId(Int32) on controller BookPublisher.Controllers.AuthorDTOr (BookPublisher).
+2024-05-13 15:46:57.584 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Name]
+FROM [author] AS [a]
+WHERE [a].[Id] = @__id_0
+2024-05-13 15:46:57.586 +07:00 [INF] author Page => {"Id":1018,"Name":"Đen Vâu","$type":"AuthorDTO"}
+2024-05-13 15:46:57.587 +07:00 [INF] Executing OkObjectResult, writing value of type 'BookPublisher.Models.DTO.AuthorDTO'.
+2024-05-13 15:46:57.588 +07:00 [INF] Executed action BookPublisher.Controllers.AuthorDTOr.GetId (BookPublisher) in 15.6913ms
+2024-05-13 15:46:57.589 +07:00 [INF] Executed endpoint 'BookPublisher.Controllers.AuthorDTOr.GetId (BookPublisher)'
+2024-05-13 15:46:57.590 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/AuthorDTOr/Get-By-Id?id=1018 - 200 null application/json; charset=utf-8 30.6695ms

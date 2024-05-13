@@ -30,6 +30,7 @@ namespace BookPublisher.Controllers
             _datacontext = datacontext;
             _authorRepository = authorRepository;
         }
+        [Authorize(Roles = "Read")]
         [HttpGet("Filter-page-sort")]
         public IActionResult Filtering(string? name,int page, float pageSize,bool isAccess) 
         {
@@ -162,7 +163,7 @@ namespace BookPublisher.Controllers
                     Pages = pageCount,
                 };
 
-                Log.Information("Student Page => {@response}", response);
+                Log.Information("author Page => {@response}", response);
 
                 return Ok(response);
             }
@@ -171,34 +172,44 @@ namespace BookPublisher.Controllers
                 return BadRequest();
             }
         }
+        [Authorize(Roles ="Read")]
         [HttpGet("Get-all")]
         public IActionResult Getall()
         {
             var allauthor = _authorRepository.GetAll();
+            Log.Information("author Page => {@allauthor}", allauthor);
             return Ok(allauthor);
         }
+        [Authorize(Roles = "Read")]
         [HttpGet("Get-By-Id")]
         public IActionResult GetId(int id)
         {
             var getid = _authorRepository.GetById(id);
+            Log.Information("author Page => {@getid}", getid);
             return Ok( getid );
         }
+        [Authorize(Roles = "Write")]
         [HttpPost("Push-Author")]
         public IActionResult Push([FromBody] AddAuthorDTO addAuthor)
         {
             var PushAuthor = _authorRepository.AddAuthor(addAuthor);
+            Log.Information("author Page => {@PushAuthor}", PushAuthor);
             return Ok( PushAuthor );
         }
+        [Authorize(Roles = "Write")]
         [HttpPut]
         public IActionResult Put(int id, [FromBody] AddAuthorDTO addAuthorDTO)
         {
             var PutAuthor = _authorRepository.Put(id, addAuthorDTO);
+            Log.Information("author Page => {@Put}", Put);
             return Ok( PutAuthor );
         }
+        [Authorize(Roles ="Write")]
         [HttpDelete("Delete")]
         public IActionResult Delete(int id)
         {
             var Delt = _authorRepository.Delete(id);
+            Log.Information("author Page => {@Delt}", Delt);
             return Ok( Delt );
         }
     }

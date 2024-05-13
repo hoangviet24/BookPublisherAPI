@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "D:\\API\\BookPublisher\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\controllers\\authordtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:controllers\\authordtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\repository\\iauthorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:repository\\iauthorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\logs\\mylog-20240513.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:logs\\mylog-20240513.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\controllers\\filteringdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:controllers\\filteringdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\controllers\\authordtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:controllers\\authordtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|d:\\api\\bookpublisher\\models\\dto\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41B242B5-BCCB-433C-9930-013292CBC164}|BookPublisher.csproj|solutionrelative:models\\dto\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,60 +29,72 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 190,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthorDTOController.cs",
-              "DocumentMoniker": "D:\\API\\BookPublisher\\Controllers\\AuthorDTOController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthorDTOController.cs",
-              "ToolTip": "D:\\API\\BookPublisher\\Controllers\\AuthorDTOController.cs",
-              "RelativeToolTip": "Controllers\\AuthorDTOController.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAAAFMAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T03:19:16.114Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\API\\BookPublisher\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\API\\BookPublisher\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAwwB8AAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T03:12:07.279Z",
+              "Title": "MyLog-20240513.txt",
+              "DocumentMoniker": "D:\\API\\BookPublisher\\logs\\MyLog-20240513.txt",
+              "RelativeDocumentMoniker": "logs\\MyLog-20240513.txt",
+              "ToolTip": "D:\\API\\BookPublisher\\logs\\MyLog-20240513.txt",
+              "RelativeToolTip": "logs\\MyLog-20240513.txt",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-05-13T08:47:08.912Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IAuthorRepository.cs",
-              "DocumentMoniker": "D:\\API\\BookPublisher\\Repository\\IAuthorRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\IAuthorRepository.cs",
-              "ToolTip": "D:\\API\\BookPublisher\\Repository\\IAuthorRepository.cs",
-              "RelativeToolTip": "Repository\\IAuthorRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAIAAAA",
+              "Title": "AuthorDTOController.cs",
+              "DocumentMoniker": "D:\\API\\BookPublisher\\Controllers\\AuthorDTOController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthorDTOController.cs",
+              "ToolTip": "D:\\API\\BookPublisher\\Controllers\\AuthorDTOController.cs",
+              "RelativeToolTip": "Controllers\\AuthorDTOController.cs",
+              "ViewState": "AQIAALoAAAAAAAAAAAAAANMAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T02:51:45.333Z",
+              "WhenOpened": "2024-05-13T08:32:22.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginRequestDTO.cs",
+              "DocumentMoniker": "D:\\API\\BookPublisher\\Models\\DTO\\LoginRequestDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTO\\LoginRequestDTO.cs",
+              "ToolTip": "D:\\API\\BookPublisher\\Models\\DTO\\LoginRequestDTO.cs",
+              "RelativeToolTip": "Models\\DTO\\LoginRequestDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T08:00:23.192Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FilteringDTO.cs",
-              "DocumentMoniker": "D:\\API\\BookPublisher\\Controllers\\FilteringDTO.cs",
-              "RelativeDocumentMoniker": "Controllers\\FilteringDTO.cs",
-              "ToolTip": "D:\\API\\BookPublisher\\Controllers\\FilteringDTO.cs",
-              "RelativeToolTip": "Controllers\\FilteringDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\API\\BookPublisher\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\API\\BookPublisher\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAUwDMAAABTAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T02:40:54.223Z",
+              "WhenOpened": "2024-05-13T07:50:07.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\API\\BookPublisher\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\API\\BookPublisher\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-07T03:12:07.279Z",
               "EditorCaption": ""
             }
           ]

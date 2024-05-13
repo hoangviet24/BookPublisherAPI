@@ -170,6 +170,22 @@ namespace BookPublisher.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BookPublisher.Models.DTO.AuthorDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuthorDTO");
+                });
+
             modelBuilder.Entity("BookPublisher.Models.DTO.BookWithAuthorAndPublisherDTO", b =>
                 {
                     b.Property<int>("Id")
@@ -193,7 +209,7 @@ namespace BookPublisher.Migrations
                     b.Property<int?>("Genre")
                         .HasColumnType("int");
 
-                    b.Property<string>("PublisherId")
+                    b.Property<string>("PublisherName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Rate")

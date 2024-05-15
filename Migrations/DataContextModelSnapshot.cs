@@ -17,7 +17,7 @@ namespace BookPublisher.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -66,8 +66,8 @@ namespace BookPublisher.Migrations
                     b.Property<string>("CoverUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DateAdd")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("DateAdd")
+                        .HasColumnType("date");
 
                     b.Property<DateOnly?>("DateRead")
                         .HasColumnType("date");
@@ -87,9 +87,6 @@ namespace BookPublisher.Migrations
                     b.Property<int?>("PublisherId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PublishersId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Rate")
                         .HasColumnType("int");
 
@@ -98,7 +95,7 @@ namespace BookPublisher.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublishersId");
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("books");
 
@@ -107,7 +104,7 @@ namespace BookPublisher.Migrations
                         {
                             Id = 1,
                             CoverUrl = "Hello",
-                            DateAdd = new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAdd = new DateOnly(2004, 1, 28),
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
@@ -121,7 +118,7 @@ namespace BookPublisher.Migrations
                         {
                             Id = 2,
                             CoverUrl = "Hello",
-                            DateAdd = new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAdd = new DateOnly(2004, 1, 28),
                             DateRead = new DateOnly(2024, 4, 15),
                             Description = "Chưa biết",
                             Genre = 17,
@@ -197,8 +194,8 @@ namespace BookPublisher.Migrations
                     b.Property<string>("AuthorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateAdd")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("DateAdd")
+                        .HasColumnType("date");
 
                     b.Property<DateOnly?>("DateRead")
                         .HasColumnType("date");
@@ -210,6 +207,7 @@ namespace BookPublisher.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PublisherName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Rate")
@@ -229,6 +227,37 @@ namespace BookPublisher.Migrations
                     b.ToTable("BookWithAuthorAndPublisherDTO");
                 });
 
+            modelBuilder.Entity("BookPublisher.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("BookPublisher.Models.Publishers", b =>
                 {
                     b.Property<int>("Id")
@@ -241,6 +270,7 @@ namespace BookPublisher.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -260,7 +290,7 @@ namespace BookPublisher.Migrations
                 {
                     b.HasOne("BookPublisher.Models.Publishers", "Publishers")
                         .WithMany("IdBook")
-                        .HasForeignKey("PublishersId");
+                        .HasForeignKey("PublisherId");
 
                     b.Navigation("Publishers");
                 });

@@ -172,7 +172,7 @@ namespace BookPublisher.Controllers
                 return BadRequest();
             }
         }
-        [Authorize(Roles ="Read")]
+        
         [HttpGet("Get-all")]
         public IActionResult Getall()
         {
@@ -180,7 +180,7 @@ namespace BookPublisher.Controllers
             Log.Information("author Page => {@allauthor}", allauthor);
             return Ok(allauthor);
         }
-        [Authorize(Roles = "Read")]
+       
         [HttpGet("Get-By-Id")]
         public IActionResult GetId(int id)
         {
@@ -188,7 +188,7 @@ namespace BookPublisher.Controllers
             Log.Information("author Page => {@getid}", getid);
             return Ok( getid );
         }
-        [Authorize(Roles = "Write")]
+        
         [HttpPost("Push-Author")]
         public IActionResult Push([FromBody] AddAuthorDTO addAuthor)
         {
@@ -196,7 +196,7 @@ namespace BookPublisher.Controllers
             Log.Information("author Page => {@PushAuthor}", PushAuthor);
             return Ok( PushAuthor );
         }
-        [Authorize(Roles = "Write")]
+
         [HttpPut]
         public IActionResult Put(int id, [FromBody] AddAuthorDTO addAuthorDTO)
         {
@@ -204,7 +204,6 @@ namespace BookPublisher.Controllers
             Log.Information("author Page => {@Put}", Put);
             return Ok( PutAuthor );
         }
-        [Authorize(Roles ="Write")]
         [HttpDelete("Delete")]
         public IActionResult Delete(int id)
         {

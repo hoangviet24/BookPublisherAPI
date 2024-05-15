@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookPublisher.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class All : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,58 @@ namespace BookPublisher.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_author", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AuthorDTO",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuthorDTO", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookWithAuthorAndPublisherDTO",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isRead = table.Column<bool>(type: "bit", nullable: true),
+                    DateRead = table.Column<DateOnly>(type: "date", nullable: true),
+                    Rate = table.Column<int>(type: "int", nullable: true),
+                    Genre = table.Column<int>(type: "int", nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateAdd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PublisherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookWithAuthorAndPublisherDTO", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileExtension = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Size = table.Column<long>(type: "bigint", nullable: false),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,6 +99,7 @@ namespace BookPublisher.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdList = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsRead = table.Column<bool>(type: "bit", nullable: true),
@@ -103,11 +156,11 @@ namespace BookPublisher.Migrations
 
             migrationBuilder.InsertData(
                 table: "books",
-                columns: new[] { "Id", "CoverUrl", "DateAdd", "DateRead", "Description", "Genre", "IsRead", "PublisherId", "PublishersId", "Rate", "Title" },
+                columns: new[] { "Id", "CoverUrl", "DateAdd", "DateRead", "Description", "Genre", "IdList", "IsRead", "PublisherId", "PublishersId", "Rate", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Hello", new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(2024, 4, 15), "Chưa biết", 17, false, 1, null, 4, "Sách hay" },
-                    { 2, "Hello", new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(2024, 4, 15), "Chưa biết", 17, false, 1, null, 3, "Sách hay" }
+                    { 1, "Hello", new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(2024, 4, 15), "Chưa biết", 17, 0, false, 1, null, 4, "Sách hay" },
+                    { 2, "Hello", new DateTime(2004, 1, 28, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(2024, 4, 15), "Chưa biết", 17, 0, false, 1, null, 3, "Sách hay" }
                 });
 
             migrationBuilder.InsertData(
@@ -144,7 +197,16 @@ namespace BookPublisher.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AuthorDTO");
+
+            migrationBuilder.DropTable(
                 name: "book_authors");
+
+            migrationBuilder.DropTable(
+                name: "BookWithAuthorAndPublisherDTO");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "author");

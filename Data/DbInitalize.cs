@@ -37,7 +37,7 @@ namespace BookPublisher.Data
                 {
                     Id = 1,
                     Title = "Sách hay",
-                    DateAdd = new DateTime(2004,1,28,15,0,0),
+                    DateAdd = new DateOnly(2004,1,28),
                     DateRead = new DateOnly(2024,4,15),
                     Rate = 4,
                     IsRead = false,
@@ -50,7 +50,7 @@ namespace BookPublisher.Data
                 {
                     Id = 2,
                     Title = "Sách hay",
-                    DateAdd = new DateTime(2004, 1, 28, 15, 0, 0),
+                    DateAdd = new DateOnly(2004, 1, 28),
                     DateRead = new DateOnly(2024, 4, 15),
                     Rate = 3,
                     IsRead = false,

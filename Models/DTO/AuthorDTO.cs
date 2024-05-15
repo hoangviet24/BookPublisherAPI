@@ -1,4 +1,6 @@
-﻿namespace BookPublisher.Models.DTO
+﻿using System.Drawing.Printing;
+
+namespace BookPublisher.Models.DTO
 {
     public class AuthorDTO
     {

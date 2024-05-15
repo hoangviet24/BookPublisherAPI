@@ -13,11 +13,10 @@ namespace BookPublisher.Models
         public string? Description { get; set; }
         public bool? IsRead { get; set; }
         public DateOnly? DateRead { get; set; }
-        [Range(1,5)]
         public int? Rate { get; set; }
         public Genre? Genre { get; set; }
         public string? CoverUrl { get; set; }
-        public DateTime? DateAdd { get; set; }
+        public DateOnly? DateAdd { get; set; }
         public int? PublisherId { get; set; }
         public Publishers? Publishers { get; set; }
     }

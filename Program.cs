@@ -1,30 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
-using BookPublisher.Data;
-using BookPublisher.Models;
-using Microsoft.AspNetCore.Builder;
-using BookPublisher.Repository;
+﻿using Serilog;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.Options;
+using BookPublisher.Data;
 using BookPublisher.Repository.AUTH;
+using BookPublisher.Repository;
 using Microsoft.OpenApi.Models;
-using Serilog;
+using BookPublisher.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
-            .WriteTo.Console()
-            .WriteTo.File("logs/MyLog-.txt", rollingInterval: RollingInterval.Day)
-            .CreateLogger();
+    .WriteTo.Console()
+    .WriteTo.File("logs/MyLog-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 builder.Host.UseSerilog();
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -32,8 +30,7 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Book API",
         Version = "v1"
     });
-    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new
-   OpenApiSecurityScheme
+    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
     {
         Name = "Authorization",
         In = ParameterLocation.Header,
@@ -41,26 +38,24 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = JwtBearerDefaults.AuthenticationScheme
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
- {
- {
- new OpenApiSecurityScheme
- {
- Reference= new OpenApiReference
- {
- Type= ReferenceType.SecurityScheme,
- Id= JwtBearerDefaults.AuthenticationScheme
- },
- Scheme = "Oauth2",
- Name =JwtBearerDefaults.AuthenticationScheme,
- In = ParameterLocation.Header
- },
- new List<string>()
- }
- });
+    {
+        {new OpenApiSecurityScheme {
+            Reference = new OpenApiReference {
+                Type = ReferenceType.SecurityScheme,
+                Id = JwtBearerDefaults.AuthenticationScheme
+            },
+            Scheme = "Oauth2",
+            Name = JwtBearerDefaults.AuthenticationScheme,
+            In = ParameterLocation.Header
+        },
+        new List<string>()
+        }
+    });
 });
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
     options.TokenValidationParameters = new TokenValidationParameters
-{
+    {
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -69,19 +64,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ClockSkew = TimeSpan.Zero,
         IssuerSigningKey = new SymmetricSecurityKey(
-        Encoding.UTF8.GetBytes(s: builder.Configuration[key: "Jwt:Key"]))
+        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     });
-builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
+builder.Services.AddScoped<IBookRepository,BookRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IPublisherReposi, PublisherReposi>();
 builder.Services.AddScoped<ITokenRepository, AuthTokenRepository>();
 
-//Config Identity User
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("Book")
     .AddEntityFrameworkStores<AuthDBContext>()
     .AddDefaultTokenProviders();
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
@@ -91,13 +88,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 });
-//Auth
+
 builder.Services.AddDbContext<AuthDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Auth")));
-//Data
+
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
-//Build
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -109,9 +106,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

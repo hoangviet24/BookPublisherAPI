@@ -18,7 +18,7 @@ namespace BookPublisher.Controllers
             _dataContext = dataContext;
             _bookRepository = bookRepository;
         }
-        [HttpGet("Get all")]
+        [HttpGet("Getall")]
         public IActionResult Getall()
         {
             var allbook = _bookRepository.GetAll();

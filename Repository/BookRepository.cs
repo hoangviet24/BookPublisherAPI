@@ -63,6 +63,7 @@ namespace BookPublisher.Repository
                 Description = books.Description,
                 isRead = books.IsRead,
                 DateRead = (bool)books.IsRead ? books.DateRead.Value : null,
+                DateAdd = books.DateAdd,
                 Rate = (bool)books.IsRead ? books.Rate : null,
                 Genre = books.Genre,
                 Url = books.CoverUrl,
@@ -82,10 +83,11 @@ namespace BookPublisher.Repository
                 Description = books.Description,
                 isRead = books.IsRead,
                 DateRead = (bool)books.IsRead ? books.DateRead.Value : null,
+                DateAdd = books.DateAdd,
                 Rate = (bool)books.IsRead ? books.Rate : null,
                 Genre = books.Genre,
                 Url = books.CoverUrl,
-                PublisherName = books.Publishers.Id.ToString(),
+                PublisherName = books.Publishers.Name,
                 AuthorName = books.BookList.Select(n => n.Author.Name).ToList()
             }).FirstOrDefault();
             return GetBookDTO;

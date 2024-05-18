@@ -77,7 +77,7 @@ namespace BookPublisher.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
         // DELETE: api/BookAuthors/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete{id}")]
         public async Task<IActionResult> DeleteBookAuthor(int id)
         {
             var bookAuthor = await _context.book_authors.FindAsync(id);
@@ -95,6 +95,18 @@ namespace BookPublisher.Controllers
         private bool BookAuthorExists(int id)
         {
             return _context.book_authors.Any(e => e.Id == id);
+        }
+
+        [HttpDelete("DeleteBook")]
+        public BookAuthor Delete(int id)
+        {
+            var publisherDomain = _context.book_authors.FirstOrDefault(x => x.idbook == id);
+            if (publisherDomain != null)
+            {
+                _context.book_authors.Remove(publisherDomain);
+                _context.SaveChanges(true);
+            }
+            return publisherDomain;
         }
     }
 }

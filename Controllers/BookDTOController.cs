@@ -36,13 +36,13 @@ namespace BookPublisher.Controllers
             var PostBook = _bookRepository.AddBook(addBookDTO);
             return Ok(PostBook);
         }
-        [HttpPut("Put by Id")]
+        [HttpPut("Put-by-Id")]
         public IActionResult Put(int id,[FromBody] AddBookDTO addBookDTO)
         {
             var PutBook = _bookRepository.Put(id, addBookDTO);
             return Ok(PutBook);
         }
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public IActionResult Del(int id)
         {
             var Delt = _bookRepository.Delete(id);
